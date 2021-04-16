@@ -1,6 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
 
 export default function Table(){
+
+  const baseUrl = "http://localhost:8082/api/"
+
+  const [genders, setGenders] = useState([])
+
+  useEffect(() => {
+    getGeneros();
+  }, []);
+
+  const getGeneros= () => {
+    axios.get(`${baseUrl}gender`)
+    .then(response => {
+      setGenders(response.data)
+      console.log(response.data)
+    })
+    .catch(e => {
+      console.log("Hubo un error "+ e);
+    })
+
+  }
+
+
     return(
         <>
         <h1>Géneros</h1>
@@ -12,10 +35,18 @@ export default function Table(){
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td colspan="2">Larry the Bird</td>
-            </tr>
+            {
+              genders.map( item => {
+                <tr key={item.id}>
+                  <th scope="row">{item.id}</th>
+                  <td colSpan="2">Mark</td>
+                </tr>
+
+              }
+
+              )
+            }
+
           </tbody>
         </table>
         </>

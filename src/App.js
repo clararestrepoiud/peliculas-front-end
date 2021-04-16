@@ -4,10 +4,10 @@ import Table from './components/Table';
 
 function App() {
 
-  const titulo ="Peliculas IUDigital"
+  const texto ="Peliculas IUDigital"
   return (
     <div className="container">
-      <NavBar />
+      <NavBar titulo={texto}/>
       <Table />
       
     </div>
